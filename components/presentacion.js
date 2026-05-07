@@ -1,5 +1,5 @@
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Linking, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Linking, ScrollView, Pressable, Alert } from 'react-native';
 
 export default function Presentacion() {
   const abrirInstagram = () => {
@@ -50,7 +50,37 @@ export default function Presentacion() {
   );
 }
 
+<Pressable
+  onPress={abrirInstagram}
 
+  onPressIn={() => console.log("Tocando botón")}
+
+  onPressOut={() => console.log("Soltó el botón")}
+
+  onLongPress={() => {
+    Alert.alert(
+      "Mantuviste presionado el botón"
+    );
+  }}
+
+  delayLongPress={800}
+
+  hitSlop={20}
+
+  style={({ pressed }) => [
+    styles.botonInstagram,
+    {
+      opacity: pressed ? 0.5 : 1,
+      transform: [
+        {
+          scale: pressed ? 0.95 : 1,
+        },
+      ],
+    },
+  ]}
+>
+  <Text style={styles.botonTexto}>Instagram</Text>
+</Pressable>
 
 
 const styles = StyleSheet.create({
