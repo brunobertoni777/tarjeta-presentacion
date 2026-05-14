@@ -1,18 +1,17 @@
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Linking, ScrollView, Pressable, Alert } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Linking, Pressable, Alert } from 'react-native';
 
 export default function Presentacion() {
+  
   const abrirInstagram = () => {
     Linking.openURL('https://www.instagram.com/_bertonibruno');
   };
-
+  
   const abrirGithub = () => {
     Linking.openURL('https://github.com/brunobertoni777'); 
   };
 
   return (
-   <SafeAreaProvider> 
-    <ScrollView contentContainerStyle={styles.scroll}>
+    
     <View style={styles.container}>
       <View style={styles.card}>
 
@@ -23,33 +22,14 @@ export default function Presentacion() {
 
         <Text style={styles.nombre}>Bruno Bertoni</Text>
         <Text style={styles.subtitulo}>17 años • Argentina</Text>
-      
-       
+
         <View style={styles.info}>
           <Text style={styles.texto}>⚽ Fútbol</Text>
           <Text style={styles.texto}>💻 Tecnología</Text>
           <Text style={styles.texto}>📚 Aprendiendo programación</Text>
-          
         </View>
-      
-      
+
         <View style={styles.botones}>
-          <TouchableOpacity style={styles.botonInstagram} onPress={abrirInstagram}>
-            <Text style={styles.botonTexto}>Instagram</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.botonGithub} onPress={abrirGithub}>
-            <Text style={styles.botonTexto}>GitHub</Text>
-          </TouchableOpacity>
-        </View>
-
-      </View>
-    </View>
-   </ScrollView>
-  </SafeAreaProvider> 
-  );
-}
-
 <Pressable
   onPress={abrirInstagram}
 
@@ -82,6 +62,42 @@ export default function Presentacion() {
   <Text style={styles.botonTexto}>Instagram</Text>
 </Pressable>
 
+<Pressable
+  onPress={abrirGithub}
+
+  onPressIn={() => console.log("Tocando botón")}
+
+  onPressOut={() => console.log("Soltó el botón")}
+
+  onLongPress={() => {
+    Alert.alert(
+      "Mantuviste presionado el botón"
+    );
+  }}
+
+  delayLongPress={800}
+
+  hitSlop={20}
+
+  style={({ pressed }) => [
+    styles.botonGithub,
+    {
+      opacity: pressed ? 0.5 : 1,
+      transform: [
+        {
+          scale: pressed ? 0.95 : 1,
+        },
+      ],
+    },
+  ]}
+>
+  <Text style={styles.botonTexto}>GitHub</Text>
+</Pressable>
+</View>
+</View>
+</View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -158,9 +174,4 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-    scroll: {
-    paddingVertical: 40,
-    alignItems: 'center',
-  },
-
 });
