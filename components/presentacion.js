@@ -1,18 +1,24 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity, Linking, Pressable, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+} from 'react-native';
+
+import { LinearGradient } from 'expo-linear-gradient';
+
+import {
+  FontAwesome5,
+  MaterialIcons,
+} from '@expo/vector-icons';
 
 export default function Presentacion() {
-  
-  const abrirInstagram = () => {
-    Linking.openURL('https://www.instagram.com/_bertonibruno');
-  };
-  
-  const abrirGithub = () => {
-    Linking.openURL('https://github.com/brunobertoni777'); 
-  };
 
   return (
-    
-    <View style={styles.container}>
+    <LinearGradient
+      colors={['#1e293b', '#334155', '#475569']}
+      style={styles.container}
+    >
       <View style={styles.card}>
 
         <Image
@@ -20,8 +26,15 @@ export default function Presentacion() {
           style={styles.imagen}
         />
 
-        <Text style={styles.nombre}>Bruno Bertoni</Text>
-        <Text style={styles.subtitulo}>17 años • Argentina</Text>
+        <Text style={styles.nombre}>
+          Bruno Bertoni
+        </Text>
+
+        <Text style={styles.subtitulo}>
+          17 años • Argentina
+        </Text>
+
+        <View style={styles.linea} />
 
         <View style={styles.info}>
           <Text style={styles.texto}>⚽ Fútbol</Text>
@@ -29,149 +42,151 @@ export default function Presentacion() {
           <Text style={styles.texto}>📚 Aprendiendo programación</Text>
         </View>
 
-        <View style={styles.botones}>
-<Pressable
-  onPress={abrirInstagram}
+        <View style={styles.skillsContainer}>
 
-  onPressIn={() => console.log("Tocando botón")}
+          <View style={styles.skill}>
+            <FontAwesome5
+              name="python"
+              size={18}
+              color="#3776AB"
+            />
 
-  onPressOut={() => console.log("Soltó el botón")}
+            <Text style={styles.skillTexto}>
+              Python
+            </Text>
+          </View>
 
-  onLongPress={() => {
-    Alert.alert(
-      "Mantuviste presionado el botón"
-    );
-  }}
+          <View style={styles.skill}>
+            <MaterialIcons
+              name="storage"
+              size={18}
+              color="#F29111"
+            />
 
-  delayLongPress={800}
+            <Text style={styles.skillTexto}>
+              SQL
+            </Text>
+          </View>
 
-  hitSlop={20}
+        </View>
 
-  style={({ pressed }) => [
-    styles.botonInstagram,
-    {
-      opacity: pressed ? 0.5 : 1,
-      transform: [
-        {
-          scale: pressed ? 0.95 : 1,
-        },
-      ],
-    },
-  ]}
->
-  <Text style={styles.botonTexto}>Instagram</Text>
-</Pressable>
+        <View style={styles.footer}>
+          <MaterialIcons
+            name="code"
+            size={16}
+            color="#94a3b8"
+          />
 
-<Pressable
-  onPress={abrirGithub}
+          <Text style={styles.footerTexto}>
+            Hecho con React Native + Expo
+          </Text>
+        </View>
 
-  onPressIn={() => console.log("Tocando botón")}
-
-  onPressOut={() => console.log("Soltó el botón")}
-
-  onLongPress={() => {
-    Alert.alert(
-      "Mantuviste presionado el botón"
-    );
-  }}
-
-  delayLongPress={800}
-
-  hitSlop={20}
-
-  style={({ pressed }) => [
-    styles.botonGithub,
-    {
-      opacity: pressed ? 0.5 : 1,
-      transform: [
-        {
-          scale: pressed ? 0.95 : 1,
-        },
-      ],
-    },
-  ]}
->
-  <Text style={styles.botonTexto}>GitHub</Text>
-</Pressable>
-</View>
-</View>
-</View>
+      </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
-    backgroundColor: '#e9eef3',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 20,
   },
 
   card: {
-    width: 300,
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 25,
+    width: 320,
+    backgroundColor: '#ffffff',
+    borderRadius: 25,
+    padding: 30,
     alignItems: 'center',
-    elevation: 5,
+
     shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.25,
+    shadowRadius: 15,
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+
+    elevation: 8,
   },
 
   imagen: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    marginBottom: 15,
+    width: 130,
+    height: 130,
+    borderRadius: 65,
+    marginBottom: 18,
+    borderWidth: 4,
+    borderColor: '#f1f5f9',
   },
 
   nombre: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
-    color: '#222',
+    color: '#1e293b',
   },
 
   subtitulo: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 15,
-  },
-
-  info: {
-    alignItems: 'flex-start',
-    width: '100%',
+    fontSize: 15,
+    color: '#64748b',
+    marginTop: 4,
     marginBottom: 20,
   },
 
+  linea: {
+    width: '100%',
+    height: 1,
+    backgroundColor: '#e2e8f0',
+    marginBottom: 20,
+  },
+
+  info: {
+    width: '100%',
+    marginBottom: 25,
+  },
+
   texto: {
-    fontSize: 14,
-    color: '#333',
-    marginBottom: 5,
+    fontSize: 15,
+    color: '#334155',
+    marginBottom: 10,
   },
 
-  botones: {
+  skillsContainer: {
     flexDirection: 'row',
-    gap: 10, 
+    gap: 12,
+    marginTop: 10,
   },
 
-  botonInstagram: {
-    backgroundColor: '#E1306C',
+  skill: {
+    backgroundColor: '#f1f5f9',
     paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
 
-  botonGithub: {
-    backgroundColor: '#333',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
+  skillTexto: {
+    color: '#1e293b',
+    fontWeight: '600',
+    fontSize: 14,
   },
 
-  botonTexto: {
-    color: '#fff',
-    fontWeight: 'bold',
+  footer: {
+    marginTop: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
   },
+
+  footerTexto: {
+    color: '#94a3b8',
+    fontSize: 12,
+  },
+
 });
