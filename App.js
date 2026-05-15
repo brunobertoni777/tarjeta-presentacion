@@ -4,20 +4,56 @@ import Presentacion from "./components/Presentacion";
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-    <View style={styles.container}>
-      <Presentacion />
-    </View>
-    </SafeAreaProvider>
+    <NavigationContainer>
+
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+
+          headerShown: false,
+
+          tabBarStyle: {
+            backgroundColor: '#111827',
+            borderTopWidth: 0,
+            height: 65,
+          },
+
+          tabBarActiveTintColor: '#60a5fa',
+          tabBarInactiveTintColor: '#9ca3af',
+
+          tabBarIcon: ({ color, size }) => {
+
+            let iconName;
+
+            if (route.name === 'Inicio') {
+              iconName = 'home';
+            } else if (route.name === 'Contactos') {
+              iconName = 'call';
+            }
+
+            return (
+              <Ionicons
+                name={iconName}
+                size={size}
+                color={color}
+              />
+            );
+          },
+
+        })}
+      >
+
+        <Tab.Screen
+          name="Inicio"
+          component={HomeScreen}
+        />
+
+        <Tab.Screen
+          name="Contactos"
+          component={ContactosScreen}
+        />
+
+      </Tab.Navigator>
+
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  }
-});
-
